@@ -2,11 +2,11 @@ const toggle=document.querySelector('.menu-toggle');
 const nav=document.querySelector('#navigation');
 const dialog=document.querySelector('#preview-dialog');
 toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')!=='true';toggle.setAttribute('aria-expanded',String(open));nav.classList.toggle('open',open)});
-document.querySelectorAll('[data-preview]').forEach(button=>button.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');dialog.showModal()}));
+document.querySelectorAll('[data-preview]').forEach(button=>button.addEventListener('click',event=>{event.preventDefault();nav.classList.remove('open');toggle.setAttribute('aria-expanded','false');dialog.showModal()}));
 document.querySelectorAll('.close,.close-dialog').forEach(button=>button.addEventListener('click',()=>dialog.close()));
 dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close()}});
 
-document.querySelectorAll('a[href="#sobre"], a[href="#lazer"], a[href="#video-conceito"]').forEach(link=>link.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false')}));
+document.querySelectorAll('a[href="#sobre"], a[href="#lazer"], a[href="#video-conceito"], a[href="#localizacao"], a[href="#contato"]').forEach(link=>link.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false')}));
 
 const track=document.querySelector('.gallery-track');
 const cards=[...track.querySelectorAll('.gallery-card')];
